@@ -1,0 +1,11 @@
+USE compartilhamento_amigos;
+
+DROP TABLE amigos IF EXISTS;
+
+CREATE TABLE amigos (
+    cpf VARCHAR(11) PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    sobrenome VARCHAR(20),
+    data_de_criação TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_de_atualização TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
