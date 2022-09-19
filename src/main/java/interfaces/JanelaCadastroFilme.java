@@ -2,10 +2,7 @@ package interfaces;
 
 import controle.ControladorCadastroFilme;
 import entidades.Filme;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -26,11 +23,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         identificadorTextField.setText("");
         títuloTextField.setText("");        
         gêneroTextField.setText("");
-        tipoTextField.setText("");
         nomeDoDiretorTextField.setText("");
-        classificaçãoTextField.setText("");
-        duraçãoTextField.setText("");
-        dataDeLançamentoTextField.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -43,23 +36,14 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         títuloTextField = new javax.swing.JTextField();
         gêneroLabel = new javax.swing.JLabel();
         gêneroTextField = new javax.swing.JTextField();
-        tipoLabel = new javax.swing.JLabel();
-        tipoTextField = new javax.swing.JTextField();
         nomeDoDiretorLabel = new javax.swing.JLabel();
         nomeDoDiretorTextField = new javax.swing.JTextField();
-        classificaçãoLabel = new javax.swing.JLabel();
-        classificaçãoTextField = new javax.swing.JTextField();
-        duraçãoFilme = new javax.swing.JLabel();
-        duraçãoTextField = new javax.swing.JTextField();
-        dataDeLançamentoLabel = new javax.swing.JLabel();
         comandosPanel = new javax.swing.JPanel();
         inserirButton = new javax.swing.JButton();
         consultarButton = new javax.swing.JButton();
         alterarButton = new javax.swing.JButton();
         removerButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
-        dataDeLançamentoTextField = new javax.swing.JTextField();
-        dataLabel = new javax.swing.JLabel();
         filmesCadastradosComboBox = new javax.swing.JComboBox<>();
         filmesCadastradosLabel = new javax.swing.JLabel();
 
@@ -80,23 +64,9 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
 
         gêneroTextField.setColumns(10);
 
-        tipoLabel.setText("Tipo");
-
-        tipoTextField.setColumns(10);
-
         nomeDoDiretorLabel.setText("Nome do diretor");
 
         nomeDoDiretorTextField.setColumns(30);
-
-        classificaçãoLabel.setText("Classificação");
-
-        classificaçãoTextField.setColumns(5);
-
-        duraçãoFilme.setText("Duração");
-
-        duraçãoTextField.setColumns(5);
-
-        dataDeLançamentoLabel.setText("Data de lançamento");
 
         inserirButton.setText("Inserir");
         inserirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,10 +133,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        dataDeLançamentoTextField.setColumns(10);
-
-        dataLabel.setText("dd/mm/yyyy");
-
         filmesCadastradosComboBox.setModel(new DefaultComboBoxModel(filmes_cadastrados));
 
         filmesCadastradosLabel.setText("Filmes cadastrados");
@@ -176,63 +142,34 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(95, 95, 95)
+                .addComponent(títuloLabel)
+                .addGap(5, 5, 5)
+                .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(gêneroLabel)
+                .addGap(5, 5, 5)
+                .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(títuloLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(gêneroLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(tipoLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(tipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(nomeDoDiretorLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(classificaçãoLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(classificaçãoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(duraçãoFilme)
-                        .addGap(5, 5, 5)
-                        .addComponent(duraçãoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(dataDeLançamentoLabel)
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataDeLançamentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(dataLabel))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(identificadorLabel1)
-                                .addGap(5, 5, 5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filmesCadastradosLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filmesCadastradosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addGap(49, 49, 49)
+                        .addComponent(identificadorLabel1)
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(filmesCadastradosLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filmesCadastradosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(nomeDoDiretorLabel)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,42 +196,15 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(gêneroLabel))
                     .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(tipoLabel))
-                    .addComponent(tipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(nomeDoDiretorLabel))
                     .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(classificaçãoLabel))
-                    .addComponent(classificaçãoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(duraçãoFilme))
-                    .addComponent(duraçãoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(dataDeLançamentoLabel))
-                    .addComponent(dataDeLançamentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(dataLabel)))
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -328,18 +238,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
             identificadorTextField.setText(Integer.toString(filme.getIdentificador()));
             títuloTextField.setText(filme.getTitulo());
             gêneroTextField.setText(filme.getGenero());
-            tipoTextField.setText(filme.getTipo());
-            nomeDoDiretorTextField.setText(filme.getNomeDiretor());
-            classificaçãoTextField.setText(Integer.toString(filme.getClassificacao()));
-            duraçãoTextField.setText(Integer.toString(filme.getDuracao()));
-            
-            String data = "";
-            if (filme.getDataLancamento() != null) {
-                data = new SimpleDateFormat("dd/MM/yyy").format(filme.getDataLancamento());
-            }
-            
-            dataDeLançamentoTextField.setText(data);
-            
+            nomeDoDiretorTextField.setText(filme.getNomeDiretor());            
         } else informarErro(mensagem_erro);
     }//GEN-LAST:event_consultarFilme
 
@@ -383,29 +282,12 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         String gênero = gêneroTextField.getText();
         if (gênero.isEmpty()) return null;
         
-        String tipo = tipoTextField.getText();
-        if (tipo.isEmpty()) return null;
-        
         String nomeDoDiretor = nomeDoDiretorTextField.getText();
         if (nomeDoDiretor.isEmpty()) return null;
         
-        int classificação = Integer.parseInt(classificaçãoTextField.getText());
-        if (classificação == 0) return null;
-        
-        int duração = Integer.parseInt(duraçãoTextField.getText());
-        if (duração == 0) return null;
-        
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy", Locale.ENGLISH);
         
-        Date dataDeLançamento = null;
-        String date = dataDeLançamentoTextField.getText();
-        try {
-            dataDeLançamento = formatter.parse(date);
-        } catch (ParseException exceção) {
-            exceção.printStackTrace();
-        }
-        
-        return new Filme(identificador, título, gênero, tipo, nomeDoDiretor, classificação, duração, dataDeLançamento);
+        return new Filme(identificador, título, gênero, nomeDoDiretor);
     }
     
     private void informarSucesso(String mensagem){
@@ -425,15 +307,8 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterarButton;
-    private javax.swing.JLabel classificaçãoLabel;
-    private javax.swing.JTextField classificaçãoTextField;
     private javax.swing.JPanel comandosPanel;
     private javax.swing.JButton consultarButton;
-    private javax.swing.JLabel dataDeLançamentoLabel;
-    private javax.swing.JTextField dataDeLançamentoTextField;
-    private javax.swing.JLabel dataLabel;
-    private javax.swing.JLabel duraçãoFilme;
-    private javax.swing.JTextField duraçãoTextField;
     private javax.swing.JComboBox<String> filmesCadastradosComboBox;
     private javax.swing.JLabel filmesCadastradosLabel;
     private javax.swing.JLabel gêneroLabel;
@@ -445,8 +320,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JLabel nomeDoDiretorLabel;
     private javax.swing.JTextField nomeDoDiretorTextField;
     private javax.swing.JButton removerButton;
-    private javax.swing.JLabel tipoLabel;
-    private javax.swing.JTextField tipoTextField;
     private javax.swing.JLabel títuloLabel;
     private javax.swing.JTextField títuloTextField;
     // End of variables declaration//GEN-END:variables

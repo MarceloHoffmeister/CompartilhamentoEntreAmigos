@@ -4,13 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import persistência.BD;
 
 public class Filme {
-    private int identificador, classificaçãoDoFilme, duração;
-    private String nomeDoDiretor, título, gênero, tipo;
-    private Date dataDeLançamento;
+    private int identificador;
+    private String nomeDoDiretor, título, gênero;
     
     public static Filme buscarFilme(int identificador){
         String sql = "SELECT * FROM filmes "
@@ -28,11 +26,7 @@ public class Filme {
                         identificador,
                         lista_resultados.getString("título"),
                         lista_resultados.getString("gênero"),
-                        lista_resultados.getString("tipo"),
-                        lista_resultados.getString("nome_do_diretor"),
-                        lista_resultados.getInt("classificação"),
-                        lista_resultados.getInt("duração"),
-                        lista_resultados.getDate("data_de_lançamento")
+                        lista_resultados.getString("nome_do_diretor")
                 );
             }
             
@@ -50,22 +44,14 @@ public class Filme {
         String sql = "INSERT INTO filmes("
                 + "título,"
                 + "gênero,"
-                + "tipo,"
-                + "data_de_lançamento,"
-                + "classificação,"
-                + "duração,"
                 + "nome_do_diretor"
-                + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + ") VALUES (?, ?, ?)";
         
         try {
             PreparedStatement comando = BD.conexão.prepareStatement(sql);
             comando.setString(1, filme.getTitulo());
             comando.setString(2, filme.getGenero());
-            comando.setString(3, filme.getTipo());
-            comando.setObject(4, filme.getDataLancamento());
-            comando.setInt(5, filme.getClassificacao());
-            comando.setInt(6, filme.getDuracao());
-            comando.setString(7, filme.getNomeDiretor());
+            comando.setString(3, filme.getNomeDiretor());
             comando.executeUpdate();
             comando.close();
             
@@ -78,19 +64,15 @@ public class Filme {
     
     public static String alterarFilme(Filme filme){
         String sql = "UPDATE filmes "
-                + "SET título = ?, gênero = ?, tipo = ? , data_de_lançamento = ?, classificação = ?, duração = ?, nome_do_diretor = ? "
+                + "SET título = ?, gênero = ?, nome_do_diretor = ? "
                 + "WHERE identificador = ?";
         
         try {
             PreparedStatement comando = BD.conexão.prepareStatement(sql);
             comando.setString(1, filme.getTitulo());
             comando.setString(2, filme.getGenero());
-            comando.setString(3, filme.getTipo());
-            comando.setObject(4, filme.getDataLancamento());
-            comando.setInt(5, filme.getClassificacao());
-            comando.setInt(6, filme.getDuracao());
-            comando.setString(7, filme.getNomeDiretor());
-            comando.setInt(8, filme.getIdentificador());
+            comando.setString(3, filme.getNomeDiretor());
+            comando.setInt(4, filme.getIdentificador());
             comando.executeUpdate();
             comando.close();
             
@@ -139,20 +121,12 @@ public class Filme {
             int identificador,
             String título,
             String gênero,
-            String tipo,
-            String nomeDoDiretor,
-            int classificação,
-            int duração,
-            Date dataDeLançamento
+            String nomeDoDiretor
     ) {
         this.identificador = identificador;
         this.título = título;
         this.gênero = gênero;
-        this.tipo = tipo;
         this.nomeDoDiretor = nomeDoDiretor;
-        this.classificaçãoDoFilme = classificação;
-        this.duração = duração;
-        this.dataDeLançamento = dataDeLançamento;
     }
     
     public int getIdentificador() {
@@ -167,24 +141,8 @@ public class Filme {
         return this.gênero;
     }
     
-    public String getTipo() {
-        return this.tipo;
-    }
-    
     public String getNomeDiretor() {
         return this.nomeDoDiretor;
-    }
-    
-    public int getClassificacao() {
-        return this.classificaçãoDoFilme;
-    }
-    
-    public int getDuracao() {
-        return this.duração;
-    }
-    
-    public Date getDataLancamento() {
-        return this.dataDeLançamento;
     }
     
     public Filme(int identificador, String titulo) {
