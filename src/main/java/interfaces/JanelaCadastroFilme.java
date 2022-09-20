@@ -33,6 +33,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         identificadorLabel1 = new javax.swing.JLabel();
         identificadorTextField = new javax.swing.JTextField();
@@ -49,29 +50,82 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         removerButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
         filmesCadastradosLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        filmesCadastradosScroll = new javax.swing.JScrollPane();
         filmesCadastradosList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Filmes");
         setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         identificadorLabel1.setText("Identificador");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(identificadorLabel1, gridBagConstraints);
 
         identificadorTextField.setEditable(false);
-        identificadorTextField.setColumns(5);
+        identificadorTextField.setMinimumSize(new java.awt.Dimension(100, 25));
+        identificadorTextField.setPreferredSize(new java.awt.Dimension(100, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(identificadorTextField, gridBagConstraints);
 
         títuloLabel.setText("Título");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(títuloLabel, gridBagConstraints);
 
-        títuloTextField.setColumns(30);
+        títuloTextField.setMinimumSize(new java.awt.Dimension(250, 25));
+        títuloTextField.setPreferredSize(new java.awt.Dimension(250, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(títuloTextField, gridBagConstraints);
 
         gêneroLabel.setText("Gênero");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(gêneroLabel, gridBagConstraints);
 
-        gêneroTextField.setColumns(10);
+        gêneroTextField.setMinimumSize(new java.awt.Dimension(100, 25));
+        gêneroTextField.setPreferredSize(new java.awt.Dimension(100, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(gêneroTextField, gridBagConstraints);
 
         nomeDoDiretorLabel.setText("Nome do diretor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(nomeDoDiretorLabel, gridBagConstraints);
 
-        nomeDoDiretorTextField.setColumns(30);
+        nomeDoDiretorTextField.setMinimumSize(new java.awt.Dimension(250, 25));
+        nomeDoDiretorTextField.setPreferredSize(new java.awt.Dimension(250, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(nomeDoDiretorTextField, gridBagConstraints);
 
         inserirButton.setText("Inserir");
         inserirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +133,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 inserirFilme(evt);
             }
         });
+        comandosPanel.add(inserirButton);
 
         consultarButton.setText("Consultar");
         consultarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +141,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 consultarFilme(evt);
             }
         });
+        comandosPanel.add(consultarButton);
 
         alterarButton.setText("Alterar");
         alterarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +149,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 alterarFilme(evt);
             }
         });
+        comandosPanel.add(alterarButton);
 
         removerButton.setText("Remover");
         removerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +157,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 removerFilme(evt);
             }
         });
+        comandosPanel.add(removerButton);
 
         limparButton.setText("Limpar");
         limparButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,112 +165,40 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 limparCampos(evt);
             }
         });
+        comandosPanel.add(limparButton);
 
-        javax.swing.GroupLayout comandosPanelLayout = new javax.swing.GroupLayout(comandosPanel);
-        comandosPanel.setLayout(comandosPanelLayout);
-        comandosPanelLayout.setHorizontalGroup(
-            comandosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, comandosPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(inserirButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(consultarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(alterarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(limparButton)
-                .addContainerGap())
-        );
-        comandosPanelLayout.setVerticalGroup(
-            comandosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, comandosPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(comandosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inserirButton)
-                    .addComponent(consultarButton)
-                    .addComponent(alterarButton)
-                    .addComponent(removerButton)
-                    .addComponent(limparButton))
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(comandosPanel, gridBagConstraints);
 
         filmesCadastradosLabel.setText("Filmes cadastrados");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(filmesCadastradosLabel, gridBagConstraints);
+
+        filmesCadastradosScroll.setMinimumSize(new java.awt.Dimension(350, 50));
+        filmesCadastradosScroll.setPreferredSize(new java.awt.Dimension(350, 50));
 
         filmesCadastradosList.setModel(new DefaultListModel());
-        jScrollPane1.setViewportView(filmesCadastradosList);
+        filmesCadastradosList.setMaximumSize(new java.awt.Dimension(350, 50));
+        filmesCadastradosList.setMinimumSize(new java.awt.Dimension(350, 50));
+        filmesCadastradosList.setPreferredSize(new java.awt.Dimension(300, 50));
+        filmesCadastradosScroll.setViewportView(filmesCadastradosList);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(filmesCadastradosLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(70, 70, 70)
-                    .addComponent(títuloLabel)
-                    .addGap(5, 5, 5)
-                    .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addComponent(gêneroLabel)
-                    .addGap(5, 5, 5)
-                    .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(24, 24, 24)
-                    .addComponent(identificadorLabel1)
-                    .addGap(5, 5, 5)
-                    .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(nomeDoDiretorLabel)
-                    .addGap(5, 5, 5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(filmesCadastradosLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(identificadorLabel1))
-                    .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(títuloLabel))
-                    .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(gêneroLabel))
-                    .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(nomeDoDiretorLabel))
-                    .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(filmesCadastradosScroll, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -326,12 +312,12 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JButton consultarButton;
     private javax.swing.JLabel filmesCadastradosLabel;
     private javax.swing.JList filmesCadastradosList;
+    private javax.swing.JScrollPane filmesCadastradosScroll;
     private javax.swing.JLabel gêneroLabel;
     private javax.swing.JTextField gêneroTextField;
     private javax.swing.JLabel identificadorLabel1;
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limparButton;
     private javax.swing.JLabel nomeDoDiretorLabel;
     private javax.swing.JTextField nomeDoDiretorTextField;
