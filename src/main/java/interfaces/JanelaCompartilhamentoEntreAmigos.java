@@ -2,9 +2,6 @@ package interfaces;
 
 import controle.ControladorCadastroAmigo;
 import controle.ControladorCadastroPrograma;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import persistência.BD;
 
 public class JanelaCompartilhamentoEntreAmigos extends javax.swing.JFrame {

@@ -20,10 +20,10 @@ public class ControladorCadastroPrograma {
         else return "Nome de filme não cadastrado";
     }
     
-    public String removerPrograma(int identificador){
-        Programa programa1 = Programa.buscarPrograma(identificador);
+    public String removerPrograma(Programa programa){
+        Programa programa1 = Programa.buscarPrograma(programa.getIdentificador());
         
-        if (programa1 != null) return Programa.removerPrograma(identificador);
+        if (programa1 != null) return Programa.removerPrograma(programa);
         else return"Nome de filme não cadastrado";
     }
 }

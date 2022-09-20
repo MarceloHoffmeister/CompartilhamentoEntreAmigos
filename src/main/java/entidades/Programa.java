@@ -10,47 +10,112 @@ public class Programa {
     public enum Genero { Ação, Aventura, Comédia, Drama, Faroeste, Ficção, Guerra, Infantil, Musical, Romance, Suspense, Terror }
     
     private int identificador;
-    private String diretor, título;
+    private String diretor, titulo;
     private Genero genero;
     
     public static Programa buscarPrograma(int identificador) {
         String sql = "SELECT * FROM programas WHERE identificador = ?";
         
-        ResultSet lista_resultados = null;
+        ResultSet listaResultados;
         
         Programa programa = null;
         
+        PreparedStatement comando;
+        
+        String titulo = null;
+        Genero genero = null;
+        String diretor = null;        
+        
         try {
-            PreparedStatement comando = BD.conexao.prepareStatement(sql);
+            comando = BD.conexao.prepareStatement(sql);
+                    
+            comando.setInt(1, identificador);
+            
+            listaResultados = comando.executeQuery();
+            
+            while (listaResultados.next()) {
+                titulo = listaResultados.getString("titulo");
+                genero = Genero.values()[listaResultados.getInt("genero")];
+                diretor = listaResultados.getString("diretor");
+            }
+            
+            listaResultados.close();
+            comando.close();
+        } catch (SQLException excecao) { excecao.printStackTrace(); }
+        
+        sql = "SELECT duracao, protagonista FROM filmes WHERE programa_id = ?";
+        
+        try {
+            comando = BD.conexao.prepareStatement(sql);
             
             comando.setInt(1, identificador);
             
-            lista_resultados = comando.executeQuery();
+            listaResultados = comando.executeQuery();
             
-            while (lista_resultados.next()) {
-                programa = new Programa(
+            while (listaResultados.next()) {
+                return new Filme(
                         identificador,
-                        lista_resultados.getString("titulo"),
-                        Genero.values()[lista_resultados.getInt("genero")],
-                        lista_resultados.getString("diretor")
+                        titulo,
+                        genero,
+                        diretor,
+                        listaResultados.getInt("duracao"),
+                        listaResultados.getString("protagonista")
                 );
             }
-            
-            lista_resultados.close();
-            comando.close();
-        } catch (SQLException excecao){
-            excecao.printStackTrace();
-            programa = null;
-        }
+        } catch (SQLException excecao) { excecao.printStackTrace(); }
         
-        return programa;
+        sql = "SELECT total_episodios, ano FROM series WHERE programa_id = ?";
+        
+        try {
+            comando = BD.conexao.prepareStatement(sql);
+            
+            comando.setInt(1, identificador);
+            
+            listaResultados = comando.executeQuery();
+            
+            while (listaResultados.next()) {
+                return new Serie(
+                        identificador,
+                        titulo,
+                        genero,
+                        diretor,
+                        listaResultados.getInt("total_episodios"),
+                        listaResultados.getInt("ano")
+                );
+            }
+        } catch (SQLException excecao) { excecao.printStackTrace(); }
+        
+        sql = "SELECT valor, propriedade_intelectual FROM documentarios WHERE programa_id = ?";
+        
+        try {
+            comando = BD.conexao.prepareStatement(sql);
+            
+            comando.setInt(1, identificador);
+            
+            listaResultados = comando.executeQuery();
+            
+            while (listaResultados.next()) {
+                return new Documentario(
+                        identificador,
+                        titulo,
+                        genero,
+                        diretor,
+                        listaResultados.getInt("valor"),
+                        listaResultados.getBoolean("propriedade_intelectual")
+                );
+            }
+        } catch (SQLException excecao) { excecao.printStackTrace(); }
+        
+        return null;
     }
     
     public static String inserirPrograma(Programa programa) {
         String sql = "INSERT INTO programas (titulo, genero, diretor) VALUES (?, ?, ?)";
         
+        PreparedStatement comando;
+                
         try {
-            PreparedStatement comando = BD.conexao.prepareStatement(sql);
+            comando = BD.conexao.prepareStatement(sql);
             
             comando.setString(1, programa.getTitulo());
             comando.setInt(2, programa.getGenero().ordinal());
@@ -58,20 +123,74 @@ public class Programa {
             
             comando.executeUpdate();
             comando.close();
-            
-            return null;
         } catch (SQLException excecao){
             excecao.printStackTrace();
             return "Erro na inserção do programa no BD";
         }
+        
+        int identificador = ultimoIdentificador();
+        
+        if (programa instanceof Filme filme) {
+            sql = "INSERT INTO filmes (programa_id, duracao, protagonista) VALUES (?, ?, ?)";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.setInt(2, filme.getDuracao());
+                comando.setString(3, filme.getProtagonista());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção do filme no BD";
+            }
+        } else if (programa instanceof Serie serie) {
+            sql = "INSERT INTO series (programa_id, total_episodios, ano) VALUES (?, ?, ?)";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.setInt(2, serie.getTotalEpisodios());
+                comando.setInt(3, serie.getAno());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção da serie no BD";
+            }
+        } else if (programa instanceof Documentario documentario) {
+            sql = "INSERT INTO documentarios (programa_id, valor, propriedade_intelectual) VALUES (?, ?, ?)";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.setInt(2, documentario.getValor());
+                comando.setBoolean(3, documentario.getPropriedadeIntelectual());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção do documentário no BD";
+            }
+        }
+        
+        return null;
     }
     
     public static String alterarPrograma(Programa programa){
         String sql = "UPDATE programas SET titulo = ?, genero = ?, diretor = ? "
                 + "WHERE identificador = ?";
         
+        PreparedStatement comando;
+        
         try {
-            PreparedStatement comando = BD.conexao.prepareStatement(sql);
+            comando = BD.conexao.prepareStatement(sql);
             
             comando.setString(1, programa.getTitulo());
             comando.setInt(2, programa.getGenero().ordinal());
@@ -80,28 +199,127 @@ public class Programa {
             
             comando.executeUpdate();
             comando.close();
-            
-            return null;
         } catch (SQLException excecao) {
             excecao.printStackTrace();
             return"Erro na alteração do programa no BD";
         }
+        
+        if (programa instanceof Filme filme) {
+            sql = "UPDATE filmes SET duracao = ?, protagonista = ? "
+                    + "WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, filme.getDuracao());
+                comando.setString(2, filme.getProtagonista());
+                comando.setInt(3, filme.getIdentificador());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção do filme no BD";
+            }
+        } else if (programa instanceof Serie serie) {
+            sql = "UPDATE series SET total_episodios = ?, ano = ? "
+                    + "WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, serie.getTotalEpisodios());
+                comando.setInt(2, serie.getAno());
+                comando.setInt(3, serie.getIdentificador());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção da serie no BD";
+            }
+        } else if (programa instanceof Documentario documentario) {
+            sql = "UPDATE series SET valor = ?, propriedade_intelectual = ? "
+                    + "WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, documentario.getValor());
+                comando.setBoolean(2, documentario.getPropriedadeIntelectual());
+                comando.setInt(3, documentario.getIdentificador());
+
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na inserção do documentário no BD";
+            }
+        }
+        
+        return null;
     }
     
-    public static String removerPrograma(int identificador) {
+    public static String removerPrograma(Programa programa) {
+        int identificador = programa.getIdentificador();
+        
+        PreparedStatement comando;
+        
+        if (programa instanceof Filme) {
+            String sql = "DELETE FROM filmes WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na remoção do filme no BD";
+            }
+        } else if (programa instanceof Serie) {
+            String sql = "DELETE FROM series WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na remoção da série no BD";
+            }
+        } else if (programa instanceof Documentario) {
+            String sql = "DELETE FROM documentarios WHERE programa_id = ?";
+            
+            try {
+                comando = BD.conexao.prepareStatement(sql);
+                
+                comando.setInt(1, identificador);
+                comando.executeUpdate();
+                comando.close();
+            } catch (SQLException excecao){
+                excecao.printStackTrace();
+                return "Erro na remoção do documentário no BD";
+            }
+        }
+        
         String sql = "DELETE FROM programas WHERE identificador = ?";
         
         try {
-            PreparedStatement comando = BD.conexao.prepareStatement(sql);
+            comando = BD.conexao.prepareStatement(sql);
+            
             comando.setInt(1, identificador);
             comando.executeUpdate();
             comando.close();
-            
-            return null;
         } catch (SQLException excecao) {
             excecao.printStackTrace();
             return"Erro na remoção do programa no BD";
         }
+        
+        return null;
     }
     
     public static Programa[] getVisoes() {
@@ -118,8 +336,8 @@ public class Programa {
             
             while (lista_resultados.next()) {
                 int identificador = lista_resultados.getInt("identificador");
-                String título = lista_resultados.getString("título");
-                visões.add(new Programa(identificador, título));
+                String titulo = lista_resultados.getString("titulo");
+                visões.add(new Programa(identificador, titulo));
             }
             
             lista_resultados.close();
@@ -177,9 +395,9 @@ public class Programa {
         return nProgramasMesmosAtributos > 0;
     }
     
-    public Programa(int identificador, String título, Genero genero, String diretor) {
+    public Programa(int identificador, String titulo, Genero genero, String diretor) {
         this.identificador = identificador;
-        this.título = título;
+        this.titulo = titulo;
         this.genero = genero;
         this.diretor = diretor;
     }
@@ -193,11 +411,11 @@ public class Programa {
     }
     
     public String getTitulo() {
-        return this.título;
+        return this.titulo;
     }
     
     public void setTitulo(String titulo) {
-        this.título = titulo;
+        this.titulo = titulo;
     }
     
     public Genero getGenero() {
@@ -218,12 +436,12 @@ public class Programa {
     
     public Programa(int identificador, String titulo) {
         this.identificador = identificador;
-        this.título = titulo;
+        this.titulo = titulo;
     }
     
     public String toString() {
-        return "[" + identificador + "] " + título;
+        return "[" + identificador + "] " + titulo;
     }
     
-    public String getVisão() { return new Programa(identificador, título).toString(); }
+    public String getVisão() { return new Programa(identificador, titulo).toString(); }
 }
