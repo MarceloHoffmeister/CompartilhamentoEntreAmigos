@@ -10,7 +10,7 @@ public class Filme {
     public enum Genero { Ação, Aventura, Comédia, Drama, Faroeste, Ficção, Guerra, Infantil, Musical, Romance, Suspense, Terror }
     
     private int identificador;
-    private String nomeDoDiretor, título;
+    private String diretor, título;
     private Genero genero;
     
     public static Filme buscarFilme(int identificador) {
@@ -32,7 +32,7 @@ public class Filme {
                         identificador,
                         lista_resultados.getString("titulo"),
                         Genero.values()[lista_resultados.getInt("genero")],
-                        lista_resultados.getString("nome_do_diretor")
+                        lista_resultados.getString("diretor")
                 );
             }
             
@@ -47,14 +47,14 @@ public class Filme {
     }
     
     public static String inserirFilme(Filme filme) {
-        String sql = "INSERT INTO filmes(titulo, genero, nome_do_diretor) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO filmes(titulo, genero, diretor) VALUES (?, ?, ?)";
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
             
             comando.setString(1, filme.getTitulo());
             comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getNomeDiretor());
+            comando.setString(3, filme.getDiretor());
             
             comando.executeUpdate();
             comando.close();
@@ -67,7 +67,7 @@ public class Filme {
     }
     
     public static String alterarFilme(Filme filme){
-        String sql = "UPDATE filmes SET titulo = ?, genero = ?, nome_do_diretor = ? "
+        String sql = "UPDATE filmes SET titulo = ?, genero = ?, diretor = ? "
                 + "WHERE identificador = ?";
         
         try {
@@ -75,7 +75,7 @@ public class Filme {
             
             comando.setString(1, filme.getTitulo());
             comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getNomeDiretor());
+            comando.setString(3, filme.getDiretor());
             comando.setInt(4, filme.getIdentificador());
             
             comando.executeUpdate();
@@ -152,7 +152,7 @@ public class Filme {
     }
     
     public static boolean existeFilmeMesmosAtributos(Filme filme) {
-        String sql = "SELECT COUNT(identificador) FROM filmes WHERE titulo = ? AND genero = ? AND nome_do_diretor = ?";
+        String sql = "SELECT COUNT(identificador) FROM filmes WHERE titulo = ? AND genero = ? AND diretor = ?";
         
         ResultSet listaResultados = null;
         
@@ -163,7 +163,7 @@ public class Filme {
             
             comando.setString(1, filme.getTitulo());
             comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getNomeDiretor());
+            comando.setString(3, filme.getDiretor());
             
             listaResultados = comando.executeQuery();
             
@@ -177,11 +177,11 @@ public class Filme {
         return nFilmesMesmosAtributos > 0;
     }
     
-    public Filme(int identificador, String título, Genero genero, String nomeDoDiretor) {
+    public Filme(int identificador, String título, Genero genero, String diretor) {
         this.identificador = identificador;
         this.título = título;
         this.genero = genero;
-        this.nomeDoDiretor = nomeDoDiretor;
+        this.diretor = diretor;
     }
     
     public int getIdentificador() {
@@ -208,12 +208,12 @@ public class Filme {
         this.genero = genero;
     }
     
-    public String getNomeDiretor() {
-        return this.nomeDoDiretor;
+    public String getDiretor() {
+        return this.diretor;
     }
     
-    public void setNomeDiretor(String nomeDoDiretor) {
-        this.nomeDoDiretor = nomeDoDiretor;
+    public void setDiretor(String diretor) {
+        this.diretor = diretor;
     }
     
     public Filme(int identificador, String titulo) {

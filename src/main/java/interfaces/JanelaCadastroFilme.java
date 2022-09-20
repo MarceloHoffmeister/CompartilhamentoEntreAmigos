@@ -29,7 +29,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         identificadorTextField.setText("");
         títuloTextField.setText("");        
         generoComboBox.setSelectedIndex(-1);
-        nomeDoDiretorTextField.setText("");
+        diretorTextField.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -42,8 +42,8 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         títuloLabel = new javax.swing.JLabel();
         títuloTextField = new javax.swing.JTextField();
         gêneroLabel = new javax.swing.JLabel();
-        nomeDoDiretorLabel = new javax.swing.JLabel();
-        nomeDoDiretorTextField = new javax.swing.JTextField();
+        diretorLabel = new javax.swing.JLabel();
+        diretorTextField = new javax.swing.JTextField();
         comandosPanel = new javax.swing.JPanel();
         inserirButton = new javax.swing.JButton();
         consultarButton = new javax.swing.JButton();
@@ -103,22 +103,22 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(gêneroLabel, gridBagConstraints);
 
-        nomeDoDiretorLabel.setText("Nome do diretor");
+        diretorLabel.setText("Diretor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(nomeDoDiretorLabel, gridBagConstraints);
+        getContentPane().add(diretorLabel, gridBagConstraints);
 
-        nomeDoDiretorTextField.setMinimumSize(new java.awt.Dimension(250, 25));
-        nomeDoDiretorTextField.setPreferredSize(new java.awt.Dimension(250, 25));
+        diretorTextField.setMinimumSize(new java.awt.Dimension(250, 25));
+        diretorTextField.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(nomeDoDiretorTextField, gridBagConstraints);
+        getContentPane().add(diretorTextField, gridBagConstraints);
 
         inserirButton.setText("Inserir");
         inserirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
             identificadorTextField.setText(Integer.toString(filme.getIdentificador()));
             títuloTextField.setText(filme.getTitulo());
             generoComboBox.setSelectedItem(filme.getGenero());
-            nomeDoDiretorTextField.setText(filme.getNomeDiretor());            
+            diretorTextField.setText(filme.getDiretor());            
         } else informarErro(mensagem_erro);
     }//GEN-LAST:event_consultarFilme
 
@@ -256,7 +256,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
               visao.setIdentificador(filme.getIdentificador());
               visao.setTitulo(filme.getTitulo());
               visao.setGenero(filme.getGenero());
-              visao.setNomeDiretor(filme.getNomeDiretor());
+              visao.setDiretor(filme.getDiretor());
               filmesCadastradosList.updateUI();
           }
         } else informarErro(mensagem_erro);
@@ -293,10 +293,10 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         if (generoComboBox.getSelectedItem() != null) genero = (Genero) generoComboBox.getSelectedItem();
         else return null;
         
-        String nomeDoDiretor = nomeDoDiretorTextField.getText();
-        if (nomeDoDiretor.isEmpty()) return null;
+        String diretor = diretorTextField.getText();
+        if (diretor.isEmpty()) return null;
         
-        return new Filme(identificador, título, genero, nomeDoDiretor);
+        return new Filme(identificador, título, genero, diretor);
     }
     
     private void informarSucesso(String mensagem){
@@ -311,6 +311,8 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JButton alterarButton;
     private javax.swing.JPanel comandosPanel;
     private javax.swing.JButton consultarButton;
+    private javax.swing.JLabel diretorLabel;
+    private javax.swing.JTextField diretorTextField;
     private javax.swing.JLabel filmesCadastradosLabel;
     private javax.swing.JList filmesCadastradosList;
     private javax.swing.JScrollPane filmesCadastradosScroll;
@@ -320,8 +322,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
     private javax.swing.JButton limparButton;
-    private javax.swing.JLabel nomeDoDiretorLabel;
-    private javax.swing.JTextField nomeDoDiretorTextField;
     private javax.swing.JButton removerButton;
     private javax.swing.JLabel títuloLabel;
     private javax.swing.JTextField títuloTextField;
