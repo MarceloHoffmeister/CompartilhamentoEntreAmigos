@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import persistência.BD;
 
-public class Filme {
+public class Programa {
     public enum Genero { Ação, Aventura, Comédia, Drama, Faroeste, Ficção, Guerra, Infantil, Musical, Romance, Suspense, Terror }
     
     private int identificador;
     private String diretor, título;
     private Genero genero;
     
-    public static Filme buscarFilme(int identificador) {
-        String sql = "SELECT * FROM filmes WHERE identificador = ?";
+    public static Programa buscarPrograma(int identificador) {
+        String sql = "SELECT * FROM programas WHERE identificador = ?";
         
         ResultSet lista_resultados = null;
         
-        Filme filme = null;
+        Programa programa = null;
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
@@ -28,7 +28,7 @@ public class Filme {
             lista_resultados = comando.executeQuery();
             
             while (lista_resultados.next()) {
-                filme = new Filme(
+                programa = new Programa(
                         identificador,
                         lista_resultados.getString("titulo"),
                         Genero.values()[lista_resultados.getInt("genero")],
@@ -40,21 +40,21 @@ public class Filme {
             comando.close();
         } catch (SQLException excecao){
             excecao.printStackTrace();
-            filme = null;
+            programa = null;
         }
         
-        return filme;
+        return programa;
     }
     
-    public static String inserirFilme(Filme filme) {
-        String sql = "INSERT INTO filmes(titulo, genero, diretor) VALUES (?, ?, ?)";
+    public static String inserirPrograma(Programa programa) {
+        String sql = "INSERT INTO programas (titulo, genero, diretor) VALUES (?, ?, ?)";
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
             
-            comando.setString(1, filme.getTitulo());
-            comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getDiretor());
+            comando.setString(1, programa.getTitulo());
+            comando.setInt(2, programa.getGenero().ordinal());
+            comando.setString(3, programa.getDiretor());
             
             comando.executeUpdate();
             comando.close();
@@ -62,21 +62,21 @@ public class Filme {
             return null;
         } catch (SQLException excecao){
             excecao.printStackTrace();
-            return "Erro na inserção do filme no BD";
+            return "Erro na inserção do programa no BD";
         }
     }
     
-    public static String alterarFilme(Filme filme){
-        String sql = "UPDATE filmes SET titulo = ?, genero = ?, diretor = ? "
+    public static String alterarPrograma(Programa programa){
+        String sql = "UPDATE programas SET titulo = ?, genero = ?, diretor = ? "
                 + "WHERE identificador = ?";
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
             
-            comando.setString(1, filme.getTitulo());
-            comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getDiretor());
-            comando.setInt(4, filme.getIdentificador());
+            comando.setString(1, programa.getTitulo());
+            comando.setInt(2, programa.getGenero().ordinal());
+            comando.setString(3, programa.getDiretor());
+            comando.setInt(4, programa.getIdentificador());
             
             comando.executeUpdate();
             comando.close();
@@ -84,12 +84,12 @@ public class Filme {
             return null;
         } catch (SQLException excecao) {
             excecao.printStackTrace();
-            return"Erro na alteração do filme no BD";
+            return"Erro na alteração do programa no BD";
         }
     }
     
-    public static String removerFilme(int identificador) {
-        String sql = "DELETE FROM filmes WHERE identificador = ?";
+    public static String removerPrograma(int identificador) {
+        String sql = "DELETE FROM programas WHERE identificador = ?";
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
@@ -100,16 +100,16 @@ public class Filme {
             return null;
         } catch (SQLException excecao) {
             excecao.printStackTrace();
-            return"Erro na remoção do filme no BD";
+            return"Erro na remoção do programa no BD";
         }
     }
     
-    public static Filme[] getVisoes() {
-        String sql = "SELECT identificador, titulo FROM filmes";
+    public static Programa[] getVisoes() {
+        String sql = "SELECT identificador, titulo FROM programas";
         
         ResultSet lista_resultados = null;
         
-        ArrayList<Filme> visões = new ArrayList();
+        ArrayList<Programa> visões = new ArrayList();
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
@@ -119,18 +119,18 @@ public class Filme {
             while (lista_resultados.next()) {
                 int identificador = lista_resultados.getInt("identificador");
                 String título = lista_resultados.getString("título");
-                visões.add(new Filme(identificador, título));
+                visões.add(new Programa(identificador, título));
             }
             
             lista_resultados.close();
             comando.close();
         } catch (SQLException excecao) { excecao.printStackTrace(); }
         
-        return visões.toArray(Filme[]::new);
+        return visões.toArray(Programa[]::new);
     }
     
     public static int ultimoIdentificador() {
-        String sql = "SELECT MAX(identificador) FROM filmes";
+        String sql = "SELECT MAX(identificador) FROM programas";
         
         ResultSet listaResultados = null;
         
@@ -151,33 +151,33 @@ public class Filme {
         return identificador;
     }
     
-    public static boolean existeFilmeMesmosAtributos(Filme filme) {
-        String sql = "SELECT COUNT(identificador) FROM filmes WHERE titulo = ? AND genero = ? AND diretor = ?";
+    public static boolean existeProgramaMesmosAtributos(Programa programa) {
+        String sql = "SELECT COUNT(identificador) FROM programas WHERE titulo = ? AND genero = ? AND diretor = ?";
         
         ResultSet listaResultados = null;
         
-        int nFilmesMesmosAtributos = 0;
+        int nProgramasMesmosAtributos = 0;
         
         try {
             PreparedStatement comando = BD.conexao.prepareStatement(sql);
             
-            comando.setString(1, filme.getTitulo());
-            comando.setInt(2, filme.getGenero().ordinal());
-            comando.setString(3, filme.getDiretor());
+            comando.setString(1, programa.getTitulo());
+            comando.setInt(2, programa.getGenero().ordinal());
+            comando.setString(3, programa.getDiretor());
             
             listaResultados = comando.executeQuery();
             
             while (listaResultados.next())
-                nFilmesMesmosAtributos = listaResultados.getInt(1);
+                nProgramasMesmosAtributos = listaResultados.getInt(1);
             
             listaResultados.close();
             comando.close();
         } catch (SQLException excecao) { excecao.printStackTrace(); }
         
-        return nFilmesMesmosAtributos > 0;
+        return nProgramasMesmosAtributos > 0;
     }
     
-    public Filme(int identificador, String título, Genero genero, String diretor) {
+    public Programa(int identificador, String título, Genero genero, String diretor) {
         this.identificador = identificador;
         this.título = título;
         this.genero = genero;
@@ -216,7 +216,7 @@ public class Filme {
         this.diretor = diretor;
     }
     
-    public Filme(int identificador, String titulo) {
+    public Programa(int identificador, String titulo) {
         this.identificador = identificador;
         this.título = titulo;
     }
@@ -225,5 +225,5 @@ public class Filme {
         return "[" + identificador + "] " + título;
     }
     
-    public String getVisão() { return new Filme(identificador, título).toString(); }
+    public String getVisão() { return new Programa(identificador, título).toString(); }
 }

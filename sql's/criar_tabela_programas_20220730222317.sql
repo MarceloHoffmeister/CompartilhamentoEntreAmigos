@@ -1,8 +1,8 @@
 USE compartilhamento_amigos;
 
-DROP TABLE IF EXISTS filmes;
+DROP TABLE IF EXISTS programas;
 
-CREATE TABLE filmes (
+CREATE TABLE programas (
     identificador INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(30) NOT NULL,
     genero INT NOT NULL,

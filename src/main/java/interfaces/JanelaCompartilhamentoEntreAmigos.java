@@ -1,7 +1,7 @@
 package interfaces;
 
 import controle.ControladorCadastroAmigo;
-import controle.ControladorCadastroFilme;
+import controle.ControladorCadastroPrograma;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -67,7 +67,7 @@ public class JanelaCompartilhamentoEntreAmigos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarFilme
-        new ControladorCadastroFilme();
+        new ControladorCadastroPrograma();
     }//GEN-LAST:event_registrarFilme
 
     private void terminarSistema(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_terminarSistema

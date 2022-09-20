@@ -1,33 +1,33 @@
 package interfaces;
 
-import controle.ControladorCadastroFilme;
-import entidades.Filme;
-import entidades.Filme.Genero;
+import controle.ControladorCadastroPrograma;
+import entidades.Programa;
+import entidades.Programa.Genero;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class JanelaCadastroFilme extends javax.swing.JFrame {
+public class JanelaCadastroPrograma extends javax.swing.JFrame {
 
-    private ControladorCadastroFilme controlador;
-    DefaultListModel modeloListaFilmes;
+    private ControladorCadastroPrograma controlador;
+    DefaultListModel modeloListaProgramas;
     
-    public JanelaCadastroFilme(ControladorCadastroFilme controlador) {
+    public JanelaCadastroPrograma(ControladorCadastroPrograma controlador) {
         this.controlador = controlador;
         initComponents();
-        inicializarListaFilmes();
+        inicializarListaPrograma();
         this.limparCampos();
     }
     
-    private void inicializarListaFilmes() {
-        modeloListaFilmes = (DefaultListModel) filmesCadastradosList.getModel();
-        Filme[] visoes = Filme.getVisoes();
-        for (Filme visao : visoes) modeloListaFilmes.addElement(visao);
+    private void inicializarListaPrograma() {
+        modeloListaProgramas = (DefaultListModel) programasCadastradosList.getModel();
+        Programa[] visoes = Programa.getVisoes();
+        for (Programa visao : visoes) modeloListaProgramas.addElement(visao);
     }
     
     private void limparCampos() {
         identificadorTextField.setText("");
-        títuloTextField.setText("");        
+        tituloTextField.setText("");        
         generoComboBox.setSelectedIndex(-1);
         diretorTextField.setText("");
     }
@@ -40,7 +40,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         identificadorLabel1 = new javax.swing.JLabel();
         identificadorTextField = new javax.swing.JTextField();
         títuloLabel = new javax.swing.JLabel();
-        títuloTextField = new javax.swing.JTextField();
+        tituloTextField = new javax.swing.JTextField();
         gêneroLabel = new javax.swing.JLabel();
         diretorLabel = new javax.swing.JLabel();
         diretorTextField = new javax.swing.JTextField();
@@ -50,9 +50,9 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         alterarButton = new javax.swing.JButton();
         removerButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
-        filmesCadastradosLabel = new javax.swing.JLabel();
+        programasCadastradosLabel = new javax.swing.JLabel();
         filmesCadastradosScroll = new javax.swing.JScrollPane();
-        filmesCadastradosList = new javax.swing.JList();
+        programasCadastradosList = new javax.swing.JList();
         generoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -86,14 +86,14 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(títuloLabel, gridBagConstraints);
 
-        títuloTextField.setMinimumSize(new java.awt.Dimension(250, 25));
-        títuloTextField.setPreferredSize(new java.awt.Dimension(250, 25));
+        tituloTextField.setMinimumSize(new java.awt.Dimension(250, 25));
+        tituloTextField.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(títuloTextField, gridBagConstraints);
+        getContentPane().add(tituloTextField, gridBagConstraints);
 
         gêneroLabel.setText("Gênero");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -123,7 +123,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         inserirButton.setText("Inserir");
         inserirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inserirFilme(evt);
+                inserirPrograma(evt);
             }
         });
         comandosPanel.add(inserirButton);
@@ -131,7 +131,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         consultarButton.setText("Consultar");
         consultarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarFilme(evt);
+                consultarPrograma(evt);
             }
         });
         comandosPanel.add(consultarButton);
@@ -139,7 +139,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         alterarButton.setText("Alterar");
         alterarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alterarFilme(evt);
+                alterarPrograma(evt);
             }
         });
         comandosPanel.add(alterarButton);
@@ -147,7 +147,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         removerButton.setText("Remover");
         removerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removerFilme(evt);
+                removerPrograma(evt);
             }
         });
         comandosPanel.add(removerButton);
@@ -167,22 +167,22 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(comandosPanel, gridBagConstraints);
 
-        filmesCadastradosLabel.setText("Filmes cadastrados");
+        programasCadastradosLabel.setText("Programas cadastrados");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(filmesCadastradosLabel, gridBagConstraints);
+        getContentPane().add(programasCadastradosLabel, gridBagConstraints);
 
         filmesCadastradosScroll.setMinimumSize(new java.awt.Dimension(350, 50));
         filmesCadastradosScroll.setPreferredSize(new java.awt.Dimension(350, 50));
 
-        filmesCadastradosList.setModel(new DefaultListModel());
-        filmesCadastradosList.setMaximumSize(new java.awt.Dimension(350, 50));
-        filmesCadastradosList.setMinimumSize(new java.awt.Dimension(350, 50));
-        filmesCadastradosList.setPreferredSize(new java.awt.Dimension(300, 50));
-        filmesCadastradosScroll.setViewportView(filmesCadastradosList);
+        programasCadastradosList.setModel(new DefaultListModel());
+        programasCadastradosList.setMaximumSize(new java.awt.Dimension(350, 50));
+        programasCadastradosList.setMinimumSize(new java.awt.Dimension(350, 50));
+        programasCadastradosList.setPreferredSize(new java.awt.Dimension(300, 50));
+        filmesCadastradosScroll.setViewportView(programasCadastradosList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -207,86 +207,86 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inserirFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirFilme
-        Filme filme = obterFilmeInformado();
+    private void inserirPrograma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirPrograma
+        Programa programa = obterProgramaInformado();
         String mensagem_erro = null;
         
-        if (filme != null) mensagem_erro = controlador.inserirFilme(filme);
-        else mensagem_erro = "Algum atributo do filme não foi informado";
+        if (programa != null) mensagem_erro = controlador.inserirPrograma(programa);
+        else mensagem_erro = "Algum atributo do programa não foi informado";
         
         if (mensagem_erro == null) {
-            int identificador = Filme.ultimoIdentificador();
-            filme.setIdentificador(identificador);
-            modeloListaFilmes.addElement(filme);
-            filmesCadastradosList.setSelectedIndex(modeloListaFilmes.size()-1);
+            int identificador = Programa.ultimoIdentificador();
+            programa.setIdentificador(identificador);
+            modeloListaProgramas.addElement(programa);
+            programasCadastradosList.setSelectedIndex(modeloListaProgramas.size()-1);
             identificadorTextField.setText("" + identificador);
         } else informarErro(mensagem_erro);
-    }//GEN-LAST:event_inserirFilme
+    }//GEN-LAST:event_inserirPrograma
     
-    private void consultarFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarFilme
-        Filme visão = (Filme) filmesCadastradosList.getSelectedValue();
+    private void consultarPrograma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarPrograma
+        Programa visão = (Programa) programasCadastradosList.getSelectedValue();
        
         String mensagem_erro = null;
         
-        Filme filme = null;
+        Programa programa = null;
         
         if (visão != null) {
-            filme = Filme.buscarFilme(visão.getIdentificador());
-            if(filme == null) mensagem_erro = "Filme não cadastrado";
-        } else mensagem_erro = "Nenhum filme selecionado";
+            programa = Programa.buscarPrograma(visão.getIdentificador());
+            if(programa == null) mensagem_erro = "programa não cadastrado";
+        } else mensagem_erro = "Nenhum programa selecionado";
         
         if (mensagem_erro == null) {
-            identificadorTextField.setText(Integer.toString(filme.getIdentificador()));
-            títuloTextField.setText(filme.getTitulo());
-            generoComboBox.setSelectedItem(filme.getGenero());
-            diretorTextField.setText(filme.getDiretor());            
+            identificadorTextField.setText(Integer.toString(programa.getIdentificador()));
+            tituloTextField.setText(programa.getTitulo());
+            generoComboBox.setSelectedItem(programa.getGenero());
+            diretorTextField.setText(programa.getDiretor());            
         } else informarErro(mensagem_erro);
-    }//GEN-LAST:event_consultarFilme
+    }//GEN-LAST:event_consultarPrograma
 
-    private void alterarFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarFilme
-        Filme filme = obterFilmeInformado();
+    private void alterarPrograma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarPrograma
+        Programa programa = obterProgramaInformado();
         String mensagem_erro = null;
         
-        if (filme != null) mensagem_erro = controlador.alterarFilme(filme);
+        if (programa != null) mensagem_erro = controlador.alterarPrograma(programa);
         else mensagem_erro = "Algum atributo do amigo não foi informado";
         
         if (mensagem_erro == null) {
-          Filme visao = (Filme) filmesCadastradosList.getSelectedValue();
+          Programa visao = (Programa) programasCadastradosList.getSelectedValue();
           if (visao != null) {
-              visao.setIdentificador(filme.getIdentificador());
-              visao.setTitulo(filme.getTitulo());
-              visao.setGenero(filme.getGenero());
-              visao.setDiretor(filme.getDiretor());
-              filmesCadastradosList.updateUI();
+              visao.setIdentificador(programa.getIdentificador());
+              visao.setTitulo(programa.getTitulo());
+              visao.setGenero(programa.getGenero());
+              visao.setDiretor(programa.getDiretor());
+              programasCadastradosList.updateUI();
           }
         } else informarErro(mensagem_erro);
-    }//GEN-LAST:event_alterarFilme
+    }//GEN-LAST:event_alterarPrograma
 
-    private void removerFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerFilme
-        Filme visao = (Filme) filmesCadastradosList.getSelectedValue();
+    private void removerPrograma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerPrograma
+        Programa visao = (Programa) programasCadastradosList.getSelectedValue();
         String mensagem_erro = null;
         
-        if (visao != null) mensagem_erro = controlador.removerFilme(visao.getIdentificador());
-        else mensagem_erro = "Identificador de filme não informado";
+        if (visao != null) mensagem_erro = controlador.removerPrograma(visao.getIdentificador());
+        else mensagem_erro = "Identificador de programa não informado";
         
-        if (mensagem_erro == null) modeloListaFilmes.removeElement(visao);
+        if (mensagem_erro == null) modeloListaProgramas.removeElement(visao);
         else informarErro(mensagem_erro);
         
         limparCampos();
-    }//GEN-LAST:event_removerFilme
+    }//GEN-LAST:event_removerPrograma
 
     private void limparCampos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampos
         limparCampos();
     }//GEN-LAST:event_limparCampos
     
-    private Filme obterFilmeInformado() {
+    private Programa obterProgramaInformado() {
         int identificador = 0;
         
         if (!"".equals(identificadorTextField.getText())) {
             identificador = Integer.parseInt(identificadorTextField.getText());
         }
         
-        String título = títuloTextField.getText();
+        String título = tituloTextField.getText();
         if (título.isEmpty()) return null;
         
         Genero genero = null;
@@ -296,11 +296,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         String diretor = diretorTextField.getText();
         if (diretor.isEmpty()) return null;
         
-        return new Filme(identificador, título, genero, diretor);
-    }
-    
-    private void informarSucesso(String mensagem){
-        JOptionPane.showMessageDialog(this, mensagem, "Informação", JOptionPane.INFORMATION_MESSAGE);
+        return new Programa(identificador, título, genero, diretor);
     }
                                   
     private void informarErro(String mensagem){
@@ -313,8 +309,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JButton consultarButton;
     private javax.swing.JLabel diretorLabel;
     private javax.swing.JTextField diretorTextField;
-    private javax.swing.JLabel filmesCadastradosLabel;
-    private javax.swing.JList filmesCadastradosList;
     private javax.swing.JScrollPane filmesCadastradosScroll;
     private javax.swing.JComboBox<String> generoComboBox;
     private javax.swing.JLabel gêneroLabel;
@@ -322,8 +316,10 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
     private javax.swing.JButton limparButton;
+    private javax.swing.JLabel programasCadastradosLabel;
+    private javax.swing.JList programasCadastradosList;
     private javax.swing.JButton removerButton;
+    private javax.swing.JTextField tituloTextField;
     private javax.swing.JLabel títuloLabel;
-    private javax.swing.JTextField títuloTextField;
     // End of variables declaration//GEN-END:variables
 }
