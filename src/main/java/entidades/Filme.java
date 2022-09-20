@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import persistência.BD;
 
 public class Filme {
+    public enum Genero { Ação, Aventura, Comédia, Drama, Faroeste, Ficção, Guerra, Infantil, Musical, Romance, Suspense, Terror }
+    
     private int identificador;
-    private String nomeDoDiretor, título, gênero;
+    private String nomeDoDiretor, título;
+    private Genero genero;
     
     public static Filme buscarFilme(int identificador){
         String sql = "SELECT * FROM filmes "
@@ -25,7 +28,7 @@ public class Filme {
                 filme = new Filme(
                         identificador,
                         lista_resultados.getString("título"),
-                        lista_resultados.getString("gênero"),
+                        Genero.values()[lista_resultados.getInt("gênero")],
                         lista_resultados.getString("nome_do_diretor")
                 );
             }
@@ -50,7 +53,7 @@ public class Filme {
         try {
             PreparedStatement comando = BD.conexão.prepareStatement(sql);
             comando.setString(1, filme.getTitulo());
-            comando.setString(2, filme.getGenero());
+            comando.setInt(2, filme.getGenero().ordinal());
             comando.setString(3, filme.getNomeDiretor());
             comando.executeUpdate();
             comando.close();
@@ -70,7 +73,7 @@ public class Filme {
         try {
             PreparedStatement comando = BD.conexão.prepareStatement(sql);
             comando.setString(1, filme.getTitulo());
-            comando.setString(2, filme.getGenero());
+            comando.setInt(2, filme.getGenero().ordinal());
             comando.setString(3, filme.getNomeDiretor());
             comando.setInt(4, filme.getIdentificador());
             comando.executeUpdate();
@@ -141,7 +144,7 @@ public class Filme {
         try {
             PreparedStatement comando = BD.conexão.prepareStatement(sql);
             comando.setString(1, filme.getTitulo());
-            comando.setString(2, filme.getGenero());
+            comando.setInt(2, filme.getGenero().ordinal());
             comando.setString(3, filme.getNomeDiretor());
             listaResultados = comando.executeQuery();
             while (listaResultados.next()) {
@@ -158,12 +161,12 @@ public class Filme {
     public Filme(
             int identificador,
             String título,
-            String gênero,
+            Genero genero,
             String nomeDoDiretor
     ) {
         this.identificador = identificador;
         this.título = título;
-        this.gênero = gênero;
+        this.genero = genero;
         this.nomeDoDiretor = nomeDoDiretor;
     }
     
@@ -183,12 +186,12 @@ public class Filme {
         this.título = titulo;
     }
     
-    public String getGenero() {
-        return this.gênero;
+    public Genero getGenero() {
+        return this.genero;
     }
     
-    public void setGenero(String genero) {
-        this.gênero = genero;
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
     
     public String getNomeDiretor() {
@@ -205,7 +208,7 @@ public class Filme {
     }
     
     public String toString() {
-        return título + " [" + identificador + "]";
+        return "[" + identificador + "] " + título;
     }
     
     public String getVisão() { return new Filme(identificador, título).toString(); }

@@ -2,6 +2,8 @@ package interfaces;
 
 import controle.ControladorCadastroFilme;
 import entidades.Filme;
+import entidades.Filme.Genero;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -26,7 +28,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private void limparCampos() {
         identificadorTextField.setText("");
         títuloTextField.setText("");        
-        gêneroTextField.setText("");
+        generoComboBox.setSelectedIndex(-1);
         nomeDoDiretorTextField.setText("");
     }
 
@@ -40,7 +42,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         títuloLabel = new javax.swing.JLabel();
         títuloTextField = new javax.swing.JTextField();
         gêneroLabel = new javax.swing.JLabel();
-        gêneroTextField = new javax.swing.JTextField();
         nomeDoDiretorLabel = new javax.swing.JLabel();
         nomeDoDiretorTextField = new javax.swing.JTextField();
         comandosPanel = new javax.swing.JPanel();
@@ -52,6 +53,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         filmesCadastradosLabel = new javax.swing.JLabel();
         filmesCadastradosScroll = new javax.swing.JScrollPane();
         filmesCadastradosList = new javax.swing.JList();
+        generoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Filmes");
@@ -100,15 +102,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(gêneroLabel, gridBagConstraints);
-
-        gêneroTextField.setMinimumSize(new java.awt.Dimension(100, 25));
-        gêneroTextField.setPreferredSize(new java.awt.Dimension(100, 25));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(gêneroTextField, gridBagConstraints);
 
         nomeDoDiretorLabel.setText("Nome do diretor");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -200,6 +193,16 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(filmesCadastradosScroll, gridBagConstraints);
 
+        generoComboBox.setModel(new DefaultComboBoxModel(Genero.values()));
+        generoComboBox.setMinimumSize(new java.awt.Dimension(100, 25));
+        generoComboBox.setPreferredSize(new java.awt.Dimension(100, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(generoComboBox, gridBagConstraints);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -232,7 +235,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         if (mensagem_erro == null) {
             identificadorTextField.setText(Integer.toString(filme.getIdentificador()));
             títuloTextField.setText(filme.getTitulo());
-            gêneroTextField.setText(filme.getGenero());
+            generoComboBox.setSelectedItem(filme.getGenero());
             nomeDoDiretorTextField.setText(filme.getNomeDiretor());            
         } else informarErro(mensagem_erro);
     }//GEN-LAST:event_consultarFilme
@@ -282,13 +285,14 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         String título = títuloTextField.getText();
         if (título.isEmpty()) return null;
         
-        String gênero = gêneroTextField.getText();
-        if (gênero.isEmpty()) return null;
+        Genero genero = null;
+        if (generoComboBox.getSelectedItem() != null) genero = (Genero) generoComboBox.getSelectedItem();
+        else return null;
         
         String nomeDoDiretor = nomeDoDiretorTextField.getText();
         if (nomeDoDiretor.isEmpty()) return null;
         
-        return new Filme(identificador, título, gênero, nomeDoDiretor);
+        return new Filme(identificador, título, genero, nomeDoDiretor);
     }
     
     private void informarSucesso(String mensagem){
@@ -299,13 +303,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
     
-//    private Filme getVisãoAlterada(int identificador) {
-//        for (Filme visão : filmes_cadastrados) {
-//            if (visão.getIdentificador() == identificador) return visão;
-//        }
-//        return null;
-//    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterarButton;
     private javax.swing.JPanel comandosPanel;
@@ -313,8 +310,8 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     private javax.swing.JLabel filmesCadastradosLabel;
     private javax.swing.JList filmesCadastradosList;
     private javax.swing.JScrollPane filmesCadastradosScroll;
+    private javax.swing.JComboBox<String> generoComboBox;
     private javax.swing.JLabel gêneroLabel;
-    private javax.swing.JTextField gêneroTextField;
     private javax.swing.JLabel identificadorLabel1;
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
