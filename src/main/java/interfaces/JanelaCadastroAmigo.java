@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package interfaces;
 
 import controle.ControladorCadastroAmigo;
@@ -9,10 +5,6 @@ import entidades.Amigo;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author hoffmeister
- */
 public class JanelaCadastroAmigo extends javax.swing.JFrame {
 
     private ControladorCadastroAmigo controlador;
@@ -23,7 +15,7 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
      */
     public JanelaCadastroAmigo(ControladorCadastroAmigo controlador) {
         this.controlador = controlador;
-        amigos_cadastrados = Amigo.getVisões();
+        amigos_cadastrados = Amigo.getVisoes();
         initComponents();
         this.limparCampos();
     }
@@ -185,8 +177,8 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
         if (amigo != null) mensagem_erro = controlador.inserirAmigo(amigo);
         else mensagem_erro = "Algum atributo do amigo não foi informado";
         
-        if(mensagem_erro == null) {
-            Amigo[] visões = Amigo.getVisões();
+        if (mensagem_erro == null) {
+            Amigo[] visões = Amigo.getVisoes();
             amigosCadastradosComboBox.setModel(new DefaultComboBoxModel(visões));
             amigosCadastradosComboBox.setSelectedItem(amigo);
         } else informarErro(mensagem_erro);
@@ -194,13 +186,17 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
 
     private void consultarAmigo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarAmigo
         Amigo visão = (Amigo) amigosCadastradosComboBox.getSelectedItem();
+        
         String mensagem_erro = null;
+        
         Amigo amigo = null;
-        if(visão != null) {
+        
+        if (visão != null) {
             amigo = Amigo.buscarAmigo(visão.getCpf());
             if(amigo == null) mensagem_erro = "Amigo não cadastrado";
         } else mensagem_erro = "Nenhum amigo selecionado";
-        if(mensagem_erro == null) {
+        
+        if (mensagem_erro == null) {
             cpfTextField.setText(amigo.getCpf());
             nomeTextField.setText(amigo.getNome());
             sobrenomeTextField.setText(amigo.getSobrenome());
@@ -209,11 +205,15 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
 
     private void alterarAmigo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAmigo
         Amigo amigo = obterAmigoInformado();
+        
         String mensagem_erro = null;
-        if(amigo != null) mensagem_erro = controlador.alterarAmigo(amigo);
+        
+        if (amigo != null) mensagem_erro = controlador.alterarAmigo(amigo);
         else mensagem_erro = "Algum atributo do amigo não foi informado";
-        if(mensagem_erro == null) {
+        
+        if (mensagem_erro == null) {
             Amigo visão = getVisãoAlterada(amigo.getCpf());
+            
             if (visão != null) {
                 visão.setNome(amigo.getNome());
                 visão.setSobrenome(amigo.getSobrenome());
@@ -221,30 +221,28 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
                 amigosCadastradosComboBox.updateUI();
                 amigosCadastradosComboBox.setSelectedItem(visão);
             }
-        }
-        else informarErro(mensagem_erro);
+        } else informarErro(mensagem_erro);
     }//GEN-LAST:event_alterarAmigo
 
     private void removerAmigo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerAmigo
         Amigo visão = (Amigo) amigosCadastradosComboBox.getSelectedItem();
+        
         String mensagem_erro = null;
-        if(visão != null) mensagem_erro = controlador.removerAmigo(visão.getCpf());
+        
+        if (visão != null) mensagem_erro = controlador.removerAmigo(visão.getCpf());
         else mensagem_erro="Nenhum amigo selecionado";
-        if(mensagem_erro == null) {
+        
+        if (mensagem_erro == null) {
             amigosCadastradosComboBox.removeItem(visão);
+            
             if (amigos_cadastrados.length >= 1) amigosCadastradosComboBox.setSelectedIndex(0);
             else amigosCadastradosComboBox.setSelectedIndex(-1);
-        }
-        else informarErro(mensagem_erro);
+        } else informarErro(mensagem_erro);
     }//GEN-LAST:event_removerAmigo
 
     private void limparCampos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCampos
         this.limparCampos();
     }//GEN-LAST:event_limparCampos
-
-    private void informarSucesso(String mensagem){
-        JOptionPane.showMessageDialog(this, mensagem, "Informação", JOptionPane.INFORMATION_MESSAGE);
-    }
                                   
     private void informarErro(String mensagem){
         JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
@@ -253,10 +251,13 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
     private Amigo obterAmigoInformado() {
         String nome = nomeTextField.getText();
         if(nome.isEmpty()) return null;
+        
         String sobrenome = sobrenomeTextField.getText();
         if(sobrenome.isEmpty()) sobrenome = null;
+        
         String cpf = cpfTextField.getText();
         if(cpf.isEmpty()) return null;
+        
         return new Amigo(cpf, nome, sobrenome);
     }
     
@@ -266,41 +267,6 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-        //</editor-fold>
-
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new JanelaCadastroAmigo().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterarButton;

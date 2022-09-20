@@ -78,13 +78,6 @@ public class JanelaCompartilhamentoEntreAmigos extends javax.swing.JFrame {
     private void registrarAmigo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarAmigo
         new ControladorCadastroAmigo();
     }//GEN-LAST:event_registrarAmigo
-
-    private void informarServiçoIndisponível() {
-        JOptionPane pane = new JOptionPane("Serviço Indísponível", JOptionPane.INFORMATION_MESSAGE);
-        JDialog d = pane.createDialog((JFrame)null, "Informação");
-        d.setLocation(65, 360);
-        d.setVisible(true);
-    }
     
     public static void main(String args[]) {
         try {
@@ -109,14 +102,6 @@ public class JanelaCompartilhamentoEntreAmigos extends javax.swing.JFrame {
                 new JanelaCompartilhamentoEntreAmigos().setVisible(true);
             }
         });
-    }
-    
-    private void showSuccessWindow(String message){
-        JOptionPane.showMessageDialog(this, message, "Informação", JOptionPane.INFORMATION_MESSAGE);
-    }
-                                  
-    private void showErrorWindow(String message){
-        JOptionPane.showMessageDialog(this, message, "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

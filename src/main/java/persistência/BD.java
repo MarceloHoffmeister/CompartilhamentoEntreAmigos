@@ -8,11 +8,11 @@ public class BD {
     static final String URL = "jdbc:mysql://localhost/compartilhamento_amigos";
     static final String USUÁRIO = "root"; /* usuário do seu banco de dados aqui */
     static final String SENHA = "63823710"; /* senha do seu banco de dados aqui */
-    public static Connection conexão = null;
+    public static Connection conexao = null;
     
     public static void criaConexão() {
         try {
-            conexão = DriverManager.getConnection(URL, USUÁRIO, SENHA);
+            conexao = DriverManager.getConnection(URL, USUÁRIO, SENHA);
         } catch (SQLException exceção) {
             exceção.printStackTrace();
         }
@@ -20,9 +20,9 @@ public class BD {
     
     public static void fechaConexão() {
         try {
-            conexão.close();
-        } catch (SQLException exceção) {
-            exceção.printStackTrace();
+            conexao.close();
+        } catch (SQLException excecao) {
+            excecao.printStackTrace();
         }
     }
 }

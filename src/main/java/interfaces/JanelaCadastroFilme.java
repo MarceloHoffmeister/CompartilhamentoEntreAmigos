@@ -214,7 +214,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         if (filme != null) mensagem_erro = controlador.inserirFilme(filme);
         else mensagem_erro = "Algum atributo do filme não foi informado";
         
-        if(mensagem_erro == null) {
+        if (mensagem_erro == null) {
             int identificador = Filme.ultimoIdentificador();
             filme.setIdentificador(identificador);
             modeloListaFilmes.addElement(filme);
@@ -225,9 +225,12 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     
     private void consultarFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarFilme
         Filme visão = (Filme) filmesCadastradosList.getSelectedValue();
+       
         String mensagem_erro = null;
+        
         Filme filme = null;
-        if(visão != null) {
+        
+        if (visão != null) {
             filme = Filme.buscarFilme(visão.getIdentificador());
             if(filme == null) mensagem_erro = "Filme não cadastrado";
         } else mensagem_erro = "Nenhum filme selecionado";
@@ -263,7 +266,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         Filme visao = (Filme) filmesCadastradosList.getSelectedValue();
         String mensagem_erro = null;
         
-        if(visao != null) mensagem_erro = controlador.removerFilme(visao.getIdentificador());
+        if (visao != null) mensagem_erro = controlador.removerFilme(visao.getIdentificador());
         else mensagem_erro = "Identificador de filme não informado";
         
         if (mensagem_erro == null) modeloListaFilmes.removeElement(visao);
@@ -278,6 +281,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
     
     private Filme obterFilmeInformado() {
         int identificador = 0;
+        
         if (!"".equals(identificadorTextField.getText())) {
             identificador = Integer.parseInt(identificadorTextField.getText());
         }
