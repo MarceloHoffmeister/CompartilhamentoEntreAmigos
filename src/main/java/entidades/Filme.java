@@ -99,7 +99,7 @@ public class Filme {
         }
     }
     
-    public static Filme[] getVisões() {
+    public static Filme[] getVisoes() {
         String sql = "SELECT identificador, título FROM filmes";
         ResultSet lista_resultados = null;
         ArrayList<Filme> visões = new ArrayList();
@@ -115,6 +115,44 @@ public class Filme {
             comando.close();
         } catch (SQLException exceção_sql) { exceção_sql.printStackTrace(); }
         return visões.toArray(new Filme[visões.size()]);
+    }
+    
+    public static int ultimoIdentificador() {
+        String sql = "SELECT MAX(identificador) FROM filmes";
+        ResultSet listaResultados = null;
+        int identificador = 0;
+        try {
+            PreparedStatement comando = BD.conexão.prepareStatement(sql);
+            listaResultados = comando.executeQuery();
+            while (listaResultados.next()) {
+                identificador = listaResultados.getInt(1);
+            }
+            listaResultados.close();
+            comando.close();
+        } catch (SQLException excecaoSql) { excecaoSql.printStackTrace(); };
+        
+        return identificador;
+    }
+    
+    public static boolean existeFilmeMesmosAtributos(Filme filme) {
+        String sql = "SELECT COUNT(identificador) FROM filmes WHERE título = ? AND gênero = ? AND nome_do_diretor = ?";
+        ResultSet listaResultados = null;
+        int nFilmesMesmosAtributos = 0;
+        try {
+            PreparedStatement comando = BD.conexão.prepareStatement(sql);
+            comando.setString(1, filme.getTitulo());
+            comando.setString(2, filme.getGenero());
+            comando.setString(3, filme.getNomeDiretor());
+            listaResultados = comando.executeQuery();
+            while (listaResultados.next()) {
+                nFilmesMesmosAtributos = listaResultados.getInt(1);
+            }
+            listaResultados.close();
+            comando.close();
+        } catch (SQLException excecaoSql) { excecaoSql.printStackTrace(); }
+        
+        if (nFilmesMesmosAtributos > 0) return true;
+        else return false;
     }
     
     public Filme(
@@ -133,16 +171,32 @@ public class Filme {
         return this.identificador;
     }
     
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+    
     public String getTitulo() {
         return this.título;
+    }
+    
+    public void setTitulo(String titulo) {
+        this.título = titulo;
     }
     
     public String getGenero() {
         return this.gênero;
     }
     
+    public void setGenero(String genero) {
+        this.gênero = genero;
+    }
+    
     public String getNomeDiretor() {
         return this.nomeDoDiretor;
+    }
+    
+    public void setNomeDiretor(String nomeDoDiretor) {
+        this.nomeDoDiretor = nomeDoDiretor;
     }
     
     public Filme(int identificador, String titulo) {

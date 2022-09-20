@@ -9,10 +9,8 @@ public class ControladorCadastroFilme {
     }
     
     public String inserirFilme(Filme filme){
-        Filme filme1 = Filme.buscarFilme(filme.getIdentificador());
-        
-        if (filme1 == null) return Filme.inserirFilme(filme);
-        else return "Nome de filme já cadastrado";
+        if (!Filme.existeFilmeMesmosAtributos (filme)) return Filme.inserirFilme(filme);
+        else return "Já existe um filme com os mesmos atributos";
     }
     
     public String alterarFilme(Filme filme) {

@@ -2,21 +2,25 @@ package interfaces;
 
 import controle.ControladorCadastroFilme;
 import entidades.Filme;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class JanelaCadastroFilme extends javax.swing.JFrame {
 
     private ControladorCadastroFilme controlador;
-    Filme[] filmes_cadastrados;
+    DefaultListModel modeloListaFilmes;
     
     public JanelaCadastroFilme(ControladorCadastroFilme controlador) {
         this.controlador = controlador;
-        filmes_cadastrados = Filme.getVisões();
         initComponents();
+        inicializarListaFilmes();
         this.limparCampos();
+    }
+    
+    private void inicializarListaFilmes() {
+        modeloListaFilmes = (DefaultListModel) filmesCadastradosList.getModel();
+        Filme[] visoes = Filme.getVisoes();
+        for (Filme visao : visoes) modeloListaFilmes.addElement(visao);
     }
     
     private void limparCampos() {
@@ -44,8 +48,9 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         alterarButton = new javax.swing.JButton();
         removerButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
-        filmesCadastradosComboBox = new javax.swing.JComboBox<>();
         filmesCadastradosLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        filmesCadastradosList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Filmes");
@@ -133,52 +138,54 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        filmesCadastradosComboBox.setModel(new DefaultComboBoxModel(filmes_cadastrados));
-
         filmesCadastradosLabel.setText("Filmes cadastrados");
+
+        filmesCadastradosList.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(filmesCadastradosList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(títuloLabel)
-                .addGap(5, 5, 5)
-                .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(gêneroLabel)
-                .addGap(5, 5, 5)
-                .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(identificadorLabel1)
-                        .addGap(5, 5, 5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(filmesCadastradosLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filmesCadastradosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(nomeDoDiretorLabel)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(filmesCadastradosLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(70, 70, 70)
+                    .addComponent(títuloLabel)
+                    .addGap(5, 5, 5)
+                    .addComponent(títuloTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(56, 56, 56)
+                    .addComponent(gêneroLabel)
+                    .addGap(5, 5, 5)
+                    .addComponent(gêneroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(24, 24, 24)
+                    .addComponent(identificadorLabel1)
+                    .addGap(5, 5, 5)
+                    .addComponent(identificadorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(nomeDoDiretorLabel)
+                    .addGap(5, 5, 5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filmesCadastradosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filmesCadastradosLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(filmesCadastradosLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -204,7 +211,7 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
                     .addComponent(nomeDoDiretorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(comandosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,14 +226,16 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         else mensagem_erro = "Algum atributo do filme não foi informado";
         
         if(mensagem_erro == null) {
-            Filme[] visões = Filme.getVisões();
-            filmesCadastradosComboBox.setModel(new DefaultComboBoxModel(visões));
-            filmesCadastradosComboBox.setSelectedItem(filme);
+            int identificador = Filme.ultimoIdentificador();
+            filme.setIdentificador(identificador);
+            modeloListaFilmes.addElement(filme);
+            filmesCadastradosList.setSelectedIndex(modeloListaFilmes.size()-1);
+            identificadorTextField.setText("" + identificador);
         } else informarErro(mensagem_erro);
     }//GEN-LAST:event_inserirFilme
-
+    
     private void consultarFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarFilme
-        Filme visão = (Filme) filmesCadastradosComboBox.getSelectedItem();
+        Filme visão = (Filme) filmesCadastradosList.getSelectedValue();
         String mensagem_erro = null;
         Filme filme = null;
         if(visão != null) {
@@ -249,18 +258,26 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         if (filme != null) mensagem_erro = controlador.alterarFilme(filme);
         else mensagem_erro = "Algum atributo do amigo não foi informado";
         
-        if (mensagem_erro == null) informarSucesso("Alteração bem sucedida");
-        else informarErro(mensagem_erro);
+        if (mensagem_erro == null) {
+          Filme visao = (Filme) filmesCadastradosList.getSelectedValue();
+          if (visao != null) {
+              visao.setIdentificador(filme.getIdentificador());
+              visao.setTitulo(filme.getTitulo());
+              visao.setGenero(filme.getGenero());
+              visao.setNomeDiretor(filme.getNomeDiretor());
+              filmesCadastradosList.updateUI();
+          }
+        } else informarErro(mensagem_erro);
     }//GEN-LAST:event_alterarFilme
 
     private void removerFilme(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerFilme
-        Filme visão = (Filme) filmesCadastradosComboBox.getSelectedItem();
+        Filme visao = (Filme) filmesCadastradosList.getSelectedValue();
         String mensagem_erro = null;
         
-        if(visão != null) mensagem_erro = controlador.removerFilme(visão.getIdentificador());
+        if(visao != null) mensagem_erro = controlador.removerFilme(visao.getIdentificador());
         else mensagem_erro = "Identificador de filme não informado";
         
-        if (mensagem_erro == null) informarSucesso("Remoção bem sucedida");
+        if (mensagem_erro == null) modeloListaFilmes.removeElement(visao);
         else informarErro(mensagem_erro);
         
         limparCampos();
@@ -285,8 +302,6 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         String nomeDoDiretor = nomeDoDiretorTextField.getText();
         if (nomeDoDiretor.isEmpty()) return null;
         
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy", Locale.ENGLISH);
-        
         return new Filme(identificador, título, gênero, nomeDoDiretor);
     }
     
@@ -298,24 +313,25 @@ public class JanelaCadastroFilme extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
     
-    private Filme getVisãoAlterada(int identificador) {
-        for (Filme visão : filmes_cadastrados) {
-            if (visão.getIdentificador() == identificador) return visão;
-        }
-        return null;
-    }
+//    private Filme getVisãoAlterada(int identificador) {
+//        for (Filme visão : filmes_cadastrados) {
+//            if (visão.getIdentificador() == identificador) return visão;
+//        }
+//        return null;
+//    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterarButton;
     private javax.swing.JPanel comandosPanel;
     private javax.swing.JButton consultarButton;
-    private javax.swing.JComboBox<String> filmesCadastradosComboBox;
     private javax.swing.JLabel filmesCadastradosLabel;
+    private javax.swing.JList filmesCadastradosList;
     private javax.swing.JLabel gêneroLabel;
     private javax.swing.JTextField gêneroTextField;
     private javax.swing.JLabel identificadorLabel1;
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limparButton;
     private javax.swing.JLabel nomeDoDiretorLabel;
     private javax.swing.JTextField nomeDoDiretorTextField;
