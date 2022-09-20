@@ -131,7 +131,7 @@ public class Amigo {
     }
     
     public String toString() {
-        if (cpf != null) return nome + " " +sobrenome + " [" + cpf + "]";
+        if (cpf != null) return "[" + cpf + "] " + nome + " " + sobrenome;
         else return nome + " " + sobrenome;
     }
 }
