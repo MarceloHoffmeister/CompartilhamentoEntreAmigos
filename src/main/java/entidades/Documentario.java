@@ -13,6 +13,9 @@ public class Documentario extends Programa {
             boolean propriedadeIntelectual
     ) {
         super(identificador, título, genero, diretor);
+        
+        this.valor = valor;
+        this.propriedadeIntelectual = propriedadeIntelectual;
     }
     
     public int getValor() {

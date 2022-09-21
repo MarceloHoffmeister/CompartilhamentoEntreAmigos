@@ -191,12 +191,12 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(programasCadastradosLabel, gridBagConstraints);
 
-        filmesCadastradosScroll.setMinimumSize(new java.awt.Dimension(350, 50));
-        filmesCadastradosScroll.setPreferredSize(new java.awt.Dimension(350, 50));
+        filmesCadastradosScroll.setMinimumSize(new java.awt.Dimension(400, 50));
+        filmesCadastradosScroll.setPreferredSize(new java.awt.Dimension(400, 50));
 
         programasCadastradosList.setModel(new DefaultListModel());
-        programasCadastradosList.setMaximumSize(new java.awt.Dimension(350, 50));
-        programasCadastradosList.setMinimumSize(new java.awt.Dimension(350, 50));
+        programasCadastradosList.setMaximumSize(new java.awt.Dimension(500, 50));
+        programasCadastradosList.setMinimumSize(new java.awt.Dimension(500, 50));
         programasCadastradosList.setPreferredSize(new java.awt.Dimension(300, 50));
         filmesCadastradosScroll.setViewportView(programasCadastradosList);
 
@@ -267,16 +267,16 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
         
         if (programa instanceof Filme filme) {
             especializacaoProgramaTabbedPane.setSelectedIndex(0);
-            filme.setDuracao(filme.getDuracao());
-            filme.setProtagonista(filme.getProtagonista());
+            filmePainel.setDuracao(filme.getDuracao());
+            filmePainel.setProtagonista(filme.getProtagonista());
         } else if (programa instanceof Serie serie) {
             especializacaoProgramaTabbedPane.setSelectedIndex(1);
-            serie.setAno(serie.getAno());
-            serie.setTotalEpisodios(serie.getTotalEpisodios());
+            seriePainel.setAno(serie.getAno());
+            seriePainel.setTotalEpisodios(serie.getTotalEpisodios());
         } else if (programa instanceof Documentario documentario) {
             especializacaoProgramaTabbedPane.setSelectedIndex(2);
-            documentario.setValor(documentario.getValor());
-            documentario.setPropriedadeIntelectual(documentario.getPropriedadeIntelectual());
+            documentarioPainel.setValor(documentario.getValor());
+            documentarioPainel.setPropriedadeIntelectual(documentario.getPropriedadeIntelectual());
         }
     }//GEN-LAST:event_consultarPrograma
 

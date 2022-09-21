@@ -9,10 +9,13 @@ public class Serie extends Programa {
             String título,
             Programa.Genero genero,
             String diretor,
-            int duracao,
-            int protagonista
+            int totalEpisodios,
+            int ano
     ) {
         super(identificador, título, genero, diretor);
+        
+        this.totalEpisodios = totalEpisodios;
+        this.ano = ano;
     }
     
     public int getTotalEpisodios() {

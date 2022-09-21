@@ -175,10 +175,10 @@
     <Container class="javax.swing.JScrollPane" name="filmesCadastradosScroll">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[350, 50]"/>
+          <Dimension value="[400, 50]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[350, 50]"/>
+          <Dimension value="[400, 50]"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -198,10 +198,10 @@
               <Connection code="new DefaultListModel()" type="code"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[350, 50]"/>
+              <Dimension value="[500, 50]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[350, 50]"/>
+              <Dimension value="[500, 50]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[300, 50]"/>

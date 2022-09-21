@@ -13,6 +13,7 @@ public class Filme extends Programa {
             String protagonista
     ) {
         super(identificador, título, genero, diretor);
+        
         this.duracao = duracao;
         this.protagonista = protagonista;
     }

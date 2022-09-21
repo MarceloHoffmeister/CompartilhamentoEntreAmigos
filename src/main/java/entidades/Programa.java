@@ -239,7 +239,7 @@ public class Programa {
                 return "Erro na inserção da serie no BD";
             }
         } else if (programa instanceof Documentario documentario) {
-            sql = "UPDATE series SET valor = ?, propriedade_intelectual = ? "
+            sql = "UPDATE documentarios SET valor = ?, propriedade_intelectual = ? "
                     + "WHERE programa_id = ?";
             
             try {
