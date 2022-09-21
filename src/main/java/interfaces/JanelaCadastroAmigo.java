@@ -158,7 +158,6 @@ public class JanelaCadastroAmigo extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(cpfLabel, gridBagConstraints);
 
-        cpfTextField.setEditable(false);
         cpfTextField.setColumns(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;

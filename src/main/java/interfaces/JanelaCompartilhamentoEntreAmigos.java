@@ -34,7 +34,7 @@ public class JanelaCompartilhamentoEntreAmigos extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        registroFilme.setText("Filme");
+        registroFilme.setText("Programa");
 
         cadastrarFilme.setText("Cadastrar");
         cadastrarFilme.addActionListener(new java.awt.event.ActionListener() {
