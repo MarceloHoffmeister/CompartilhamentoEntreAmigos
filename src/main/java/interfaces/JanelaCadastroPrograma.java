@@ -66,10 +66,10 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
         removerButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
         programasCadastradosLabel = new javax.swing.JLabel();
-        filmesCadastradosScroll = new javax.swing.JScrollPane();
-        programasCadastradosList = new javax.swing.JList();
         generoComboBox = new javax.swing.JComboBox<>();
         especializacaoProgramaTabbedPane = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        programasCadastradosList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Filmes");
@@ -191,24 +191,6 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(programasCadastradosLabel, gridBagConstraints);
 
-        filmesCadastradosScroll.setMinimumSize(new java.awt.Dimension(400, 50));
-        filmesCadastradosScroll.setPreferredSize(new java.awt.Dimension(400, 50));
-
-        programasCadastradosList.setModel(new DefaultListModel());
-        programasCadastradosList.setMaximumSize(new java.awt.Dimension(500, 50));
-        programasCadastradosList.setMinimumSize(new java.awt.Dimension(500, 50));
-        programasCadastradosList.setPreferredSize(new java.awt.Dimension(300, 50));
-        filmesCadastradosScroll.setViewportView(programasCadastradosList);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(filmesCadastradosScroll, gridBagConstraints);
-
         generoComboBox.setModel(new DefaultComboBoxModel(Genero.values()));
         generoComboBox.setMinimumSize(new java.awt.Dimension(100, 25));
         generoComboBox.setPreferredSize(new java.awt.Dimension(100, 25));
@@ -225,6 +207,16 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         getContentPane().add(especializacaoProgramaTabbedPane, gridBagConstraints);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(250, 100));
+
+        programasCadastradosList.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(programasCadastradosList);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -370,12 +362,12 @@ public class JanelaCadastroPrograma extends javax.swing.JFrame {
     private javax.swing.JLabel diretorLabel;
     private javax.swing.JTextField diretorTextField;
     private javax.swing.JTabbedPane especializacaoProgramaTabbedPane;
-    private javax.swing.JScrollPane filmesCadastradosScroll;
     private javax.swing.JComboBox<String> generoComboBox;
     private javax.swing.JLabel gêneroLabel;
     private javax.swing.JLabel identificadorLabel1;
     private javax.swing.JTextField identificadorTextField;
     private javax.swing.JButton inserirButton;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limparButton;
     private javax.swing.JLabel programasCadastradosLabel;
     private javax.swing.JList programasCadastradosList;
